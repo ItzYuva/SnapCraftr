@@ -4,6 +4,7 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { SignedOut, SignInButton, SignUpButton, UserButton, SignedIn } from "@clerk/nextjs";
 
 const Header = () => {
     const path = usePathname();
@@ -47,8 +48,26 @@ const Header = () => {
               </div>
             )}
 
-            <div className="flex item-center gap-3 ml-10 md:ml-20">auth</div>
+            <div className="flex items-center gap-3 ml-10 md:ml-20">
+            <SignedOut>
+              <SignInButton />
+              <SignUpButton>
+                <button className="bg-[#6c47ff] text-ceramic-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton
+                appearance={{
+                  elements: {
+                    avatarBox: "w-8 h-8",
+                  },
+                }}
+              />
+            </SignedIn>
             </div>
+          </div>
        </header>
     );
 };
